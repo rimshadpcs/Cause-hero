@@ -1220,53 +1220,29 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
           </div>
 
           <div className={`bg-white rounded-3xl shadow-xl p-8 md:p-12 hover-lift animate-on-scroll ${isVisible[17] ? 'animate-fadeInUp' : 'opacity-0'}`} style={{animationDelay: '0.3s'}}>
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              {/* Quick Donation Amounts */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Choose an Amount</h3>
-                <div className="grid grid-cols-2 gap-3 mb-6">
-                  {['£25', '£50', '£100', '£250'].map((amount) => (
-                    <button
-                      key={amount}
-                      className="p-4 border-2 border-gray-200 rounded-2xl text-center transition-all duration-300 font-semibold hover:scale-105 hover:shadow-lg group relative overflow-hidden hover:bg-green-50"
-                      style={{borderColor: '#65C26F'}}
-                    >
-                      <div className="absolute inset-0 shimmer-bg opacity-0 group-hover:opacity-100"></div>
-                      <span className="relative z-10">{amount}</span>
-                    </button>
-                  ))}
-                </div>
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Custom Amount</label>
-                  <div className="relative group">
-                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-medium">£</span>
-                    <input
-                      type="number"
-                      placeholder="Enter amount"
-                      className="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-2xl focus:outline-none transition-all duration-300 hover:shadow-md"
-                      style={{borderColor: '#65C26F'}}
-                    />
-                  </div>
-                </div>
-              </div>
-
+            <div className="mb-8">
               {/* Donation Impact */}
-              <div className="bg-green-50 rounded-2xl p-6 hover-lift">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Your Impact</h3>
-                <div className="space-y-3">
+              <div className="bg-green-50 rounded-2xl p-8 hover-lift">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Your Impact</h3>
+                <div className="space-y-4">
                   {[
-                    { amount: '£25', impact: 'provides a month of computer training for one student' },
-                    { amount: '£50', impact: 'supplies meals for 5 children for a week' },
-                    { amount: '£100', impact: 'covers medical supplies for our health clinic' },
-                    { amount: '£250', impact: 'sponsors tailoring equipment for skill training' }
+                    { impact: 'Provide computer training and digital literacy to students of all ages' },
+                    { impact: 'Supply nutritious meals for children and families in need' },
+                    { impact: 'Fund essential medical supplies and healthcare services for our clinic' },
+                    { impact: 'Support tailoring and skill development programs for economic empowerment' },
+                    { impact: 'Maintain our reverse osmosis water plant for clean drinking water' },
+                    { impact: 'Keep our free library and internet access center running for the community' }
                   ].map((item, index) => (
                     <div key={index} className="flex items-start group">
-                      <div className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0 transition-all duration-300 group-hover:scale-150" style={{backgroundColor: '#65C26F'}}></div>
-                      <span className="text-gray-700 group-hover:text-gray-900 transition-colors">
-                        <strong>{item.amount}</strong> {item.impact}
+                      <div className="w-3 h-3 rounded-full mt-2 mr-4 flex-shrink-0 transition-all duration-300 group-hover:scale-150" style={{backgroundColor: '#65C26F'}}></div>
+                      <span className="text-gray-700 group-hover:text-gray-900 transition-colors text-lg">
+                        {item.impact}
                       </span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="text-gray-600 italic">Every donation, no matter the size, makes a meaningful difference in our community.</p>
                 </div>
               </div>
             </div>
