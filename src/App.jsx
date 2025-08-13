@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Heart, Users, BookOpen, Stethoscope, MapPin, Mail, Facebook, Twitter, ArrowRight, CreditCard, Star, Sparkles } from 'lucide-react';
+import { Menu, X, Heart, Users, BookOpen, Stethoscope, MapPin, Mail, Facebook, Twitter, ArrowRight, CreditCard, Star, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Import images
 import heroBackground from './assets/images/hero/hero_bg.jpg';
@@ -50,7 +50,7 @@ import clip5 from './assets/images/clips/clip5.jpeg';
 
 // Media logos
 import charityCommission from './assets/images/media/charitycommision.png';
-import crowdfunder from './assets/images/media/crowdfunder.png';
+import pj5Raichur from './assets/images/media/pj5.jpg';
 import eenadu from './assets/images/media/Eenadu.png';
 import suryaa from './assets/images/media/suryaa.jpg';
 import saakshi from './assets/images/media/saakshi.avif';
@@ -65,10 +65,87 @@ const CheerochCharityWebsite = () => {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalContent, setLegalContent] = useState({ title: '', content: '' });
   const [teamModalOpen, setTeamModalOpen] = useState(false);
+  const [fullGalleryOpen, setFullGalleryOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-load all images from gallery folder - No need to know exact names!
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  // Load all images automatically on component mount
+  useEffect(() => {
+    const loadGalleryImages = async () => {
+      try {
+        // Import all images from the gallery folder
+        const imageModules = import.meta.glob('/src/assets/images/gallery/*', { eager: true });
+        
+        const images = Object.entries(imageModules).map(([path, module], index) => {
+          const fileName = path.split('/').pop().split('.')[0]; // Get filename without extension
+          
+          // Generate generic titles instead of using filenames
+          const genericTitles = [
+            "Community Outreach",
+            "Educational Programs", 
+            "Health Initiatives",
+            "Welfare Support",
+            "Community Events",
+            "Charitable Activities",
+            "Volunteer Work",
+            "Social Impact",
+            "Community Development",
+            "Humanitarian Aid",
+            "Education Support",
+            "Healthcare Services",
+            "Community Building",
+            "Social Services",
+            "Charity Work"
+          ];
+          
+          return {
+            id: index + 1,
+            src: module.default || path,
+            title: genericTitles[index % genericTitles.length],
+            description: "CHEERO Charity making a difference",
+            category: "gallery",
+            filename: fileName
+          };
+        });
+        
+        setGalleryImages(images);
+      } catch (error) {
+        console.log('Gallery folder not found or empty, using fallback images');
+        // Fallback to some default images if gallery folder is empty
+        setGalleryImages([
+          {
+            id: 1,
+            src: "/src/assets/images/education/education1.jpg",
+            title: "Education Programs",
+            description: "Empowering through learning",
+            category: "education"
+          },
+          {
+            id: 2,
+            src: "/src/assets/images/health/health1.jpeg",
+            title: "Health Initiatives", 
+            description: "Caring for community wellness",
+            category: "health"
+          },
+          {
+            id: 3,
+            src: "/src/assets/images/welfare/welfare1.jpeg",
+            title: "Welfare Programs",
+            description: "Supporting those in need",
+            category: "welfare"
+          }
+        ]);
+      }
+    };
+
+    loadGalleryImages();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'programs', 'achievements', 'donate', 'contact'];
+      const sections = ['home', 'about', 'programs', 'achievements', 'gallery', 'donate', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach(section => {
@@ -154,6 +231,24 @@ const CheerochCharityWebsite = () => {
       ...prev,
       currentIndex: prev.currentIndex === 0 ? prev.images.length - 1 : prev.currentIndex - 1
     }));
+  };
+
+  // Full Gallery Modal Functions
+  const openFullGallery = (index = 0) => {
+    setCurrentImageIndex(index);
+    setFullGalleryOpen(true);
+  };
+
+  const closeFullGallery = () => {
+    setFullGalleryOpen(false);
+  };
+
+  const nextFullGalleryImage = () => {
+    setCurrentImageIndex(prev => (prev + 1) % galleryImages.length);
+  };
+
+  const prevFullGalleryImage = () => {
+    setCurrentImageIndex(prev => prev === 0 ? galleryImages.length - 1 : prev - 1);
   };
 
   const openLegalModal = (type) => {
@@ -622,7 +717,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              {['home', 'about', 'programs', 'achievements', 'contact'].map((item) => (
+              {['home', 'about', 'programs', 'achievements', 'gallery', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -675,7 +770,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {['home', 'about', 'programs', 'achievements', 'contact'].map((item) => (
+              {['home', 'about', 'programs', 'achievements', 'gallery', 'contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -972,13 +1067,111 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
             </p>
           </div>
 
-          {/* Main Content - Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Media Logos - Linear Display */}
+          <div className={`mb-16 animate-on-scroll ${isVisible[17] ? 'animate-fadeInUp' : 'opacity-0'}`}>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Featured In</h3>
             
-            {/* Left Side - Newspaper Clippings Collage */}
-            <div className={`animate-on-scroll ${isVisible[17] ? 'animate-slideInLeft' : 'opacity-0'}`}>
+            {/* Linear Media Logos */}
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
+              {/* Charity Commission */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[19] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.1s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={charityCommission} 
+                    alt="UK Charity Commission" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  UK Charity Commission
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+
+              {/* PJ5 Raichur */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[20] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.2s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={pj5Raichur} 
+                    alt="PJ5 Raichur" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  PJ5 Raichur
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+
+              {/* Eenadu News */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[21] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.3s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={eenadu} 
+                    alt="Eenadu News" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  Eenadu News
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+
+              {/* Suryaa */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[22] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.4s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={suryaa} 
+                    alt="Suryaa Telugu News" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  Suryaa Telugu News
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+
+              {/* Saakshi News */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[23] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.5s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={saakshi} 
+                    alt="Saakshi News" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  Saakshi News
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+
+              {/* Warangal Voice */}
+              <div className={`bg-white rounded-xl p-4 shadow-md hover-lift animate-on-scroll ${isVisible[24] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.6s'}}>
+                <div className="w-20 h-12 flex items-center justify-center relative">
+                  <img 
+                    src={warangalVoice} 
+                    alt="Warangal Voice" 
+                    className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
+                <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
+                  Warangal Voice
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Press Coverage & Video Section */}
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Press Clippings */}
+            <div className={`animate-on-scroll ${isVisible[18] ? 'animate-slideInLeft' : 'opacity-0'}`}>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Press Coverage</h3>
               
-              {/* Collage Grid Layout */}
+              {/* Press Clippings Grid */}
               <div className="grid grid-cols-3 gap-3 h-96 relative">
                 {/* Clip 1 - Square, top-left */}
                 <div className="col-span-1 row-span-1 relative group cursor-pointer" onClick={() => openGallery([clip1, clip2, clip3, clip4, clip5], 'Press Coverage', 0)}>
@@ -1082,119 +1275,52 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               </div>
             </div>
 
-            {/* Right Side - Media Logos Grid */}
-            <div className={`animate-on-scroll ${isVisible[18] ? 'animate-slideInRight' : 'opacity-0'}`}>
+            {/* Right Side - YouTube Video */}
+            <div className={`animate-on-scroll ${isVisible[25] ? 'animate-slideInRight' : 'opacity-0'}`}>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Featured Video</h3>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                {/* Charity Commission */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[19] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.1s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={charityCommission} 
-                      alt="UK Charity Commission" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    UK Charity Commission
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
-                  </div>
+              {/* YouTube Video Container */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/hhJlBSrKCf0?start=733&end=940&autoplay=0&mute=0&controls=1&showinfo=1&rel=0&modestbranding=1"
+                    title="CHEERO Charity Featured Video"
+                    className="w-full h-full"
+                    style={{ border: 'none' }}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
                 </div>
-
-                {/* Crowdfunder */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[20] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.2s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={crowdfunder} 
-                      alt="Crowdfunder UK" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    Crowdfunder UK
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
-                  </div>
-                </div>
-
-                {/* Eenadu News */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[21] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.3s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={eenadu} 
-                      alt="Eenadu News" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    Eenadu News
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
-                  </div>
-                </div>
-
-                {/* Suryaa */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[22] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.4s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={suryaa} 
-                      alt="Suryaa Telugu News" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    Suryaa Telugu News
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
-                  </div>
-                </div>
-
-                {/* Saakshi News */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[23] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.5s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={saakshi} 
-                      alt="Saakshi News" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    Saakshi News
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
-                  </div>
-                </div>
-
-                {/* Warangal Voice */}
-                <div className={`bg-white rounded-2xl p-6 shadow-lg hover-lift animate-on-scroll ${isVisible[24] ? 'animate-fadeInUp' : 'opacity-0'} relative group`} style={{animationDelay: '0.6s'}}>
-                  <div className="w-full h-16 flex items-center justify-center relative">
-                    <img 
-                      src={warangalVoice} 
-                      alt="Warangal Voice" 
-                      className="max-w-full max-h-full object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  
-                  {/* Tooltip */}
-                  <div className="absolute -top-14 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap z-50 pointer-events-none">
-                    Warangal Voice
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black"></div>
+                
+                {/* Video Info Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <div className="text-white">
+                    <h4 className="text-lg font-semibold mb-2">CHEERO in Action</h4>
+                    <p className="text-sm opacity-90">Watch our impact in the community - highlighting our key programs and achievements</p>
+                    <div className="flex items-center mt-3 text-xs opacity-75">
+                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
+                      </svg>
+                      Clip duration: 3 minutes 27 seconds
+                    </div>
                   </div>
                 </div>
               </div>
 
+              {/* Additional Video Info */}
+              <div className="mt-6 bg-white rounded-xl p-6 shadow-lg">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-gray-900 mb-1">Watch Our Story</h5>
+                    <p className="text-sm text-gray-600">This video showcases our community programs and the positive impact we're making in people's lives. Curated to highlight our most significant achievements.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1252,17 +1378,29 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Choose Payment Method</h3>
               
               <div className="grid md:grid-cols-2 gap-4 mb-6">
-                {/* PayPal Button */}
-                <button className="bg-blue-600 text-white px-6 py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg group relative overflow-hidden">
-                  <div className="absolute inset-0 shimmer-bg opacity-0 group-hover:opacity-100"></div>
-                  <svg className="w-6 h-6 mr-3 relative z-10" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a9.36 9.36 0 0 1-.077.437c-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106h4.61a.641.641 0 0 0 .633-.74l.033-.210.629-3.987.041-.17a.641.641 0 0 1 .633-.74h.394c3.776 0 6.73-1.533 7.59-5.966.36-1.855.174-3.406-.777-4.471z"/>
-                  </svg>
-                  <span className="relative z-10">Donate with PayPal</span>
-                </button>
+                {/* PayPal Donate Button */}
+                <div className="flex justify-center">
+                  <form action="https://www.paypal.com/donate" method="post" target="_top" className="w-full">
+                    <input type="hidden" name="business" value="rimshadpcs@gmail.com" />
+                    <input type="hidden" name="no_recurring" value="0" />
+                    <input type="hidden" name="item_name" value="CHEERO Charity Donation" />
+                    <input type="hidden" name="currency" value="GBP" />
+                    <button 
+                      type="submit"
+                      className="w-full bg-blue-600 text-white px-6 py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg group relative overflow-hidden"
+                    >
+                      <div className="absolute inset-0 shimmer-bg opacity-0 group-hover:opacity-100"></div>
+                      <svg className="w-6 h-6 mr-3 relative z-10" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a9.36 9.36 0 0 1-.077.437c-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106h4.61a.641.641 0 0 0 .633-.74l.033-.210.629-3.987.041-.17a.641.641 0 0 1 .633-.74h.394c3.776 0 6.73-1.533 7.59-5.966.36-1.855.174-3.406-.777-4.471z"/>
+                      </svg>
+                      <span className="relative z-10">Donate with PayPal</span>
+                    </button>
+                  </form>
+                </div>
 
                 {/* Bank Transfer */}
                 <button 
+                  onClick={() => scrollToSection('contact')}
                   className="text-white px-6 py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg group relative overflow-hidden"
                   style={{backgroundColor: '#65C26F'}}
                 >
@@ -1274,15 +1412,15 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
 
               <div className="text-center">
                 <p className="text-sm text-gray-600 mb-4">
-                  <strong>Note:</strong> If you want to donate through bank transfer, please contact us. 
-                  PayPal integration coming soon!
+                  <strong>Secure Donations:</strong> PayPal provides secure payment processing. 
+                  For bank transfer, contact us directly.
                 </p>
-                <button 
-                  onClick={() => scrollToSection('contact')}
-                  className="bg-gray-100 text-gray-700 px-6 py-3 rounded-2xl font-medium hover:bg-gray-200 transition-all duration-300 hover:scale-105"
-                >
-                  Contact us for bank details
-                </button>
+                <div className="flex items-center justify-center text-sm text-gray-500">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+                  </svg>
+                  SSL Encrypted • UK Charity Registration: 1162798
+                </div>
               </div>
             </div>
 
@@ -1296,6 +1434,76 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-20 bg-gray-50 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Our <span className="text-gradient">Gallery</span>
+            </h2>
+            <p className="text-xl text-gray-600">
+              Moments that capture the essence of our mission and impact
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleryImages.length === 0 ? (
+              // Loading state
+              Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg animate-pulse">
+                  <div className="w-full h-64 bg-gray-300"></div>
+                  <div className="absolute bottom-4 left-4 space-y-2">
+                    <div className="h-4 bg-gray-400 rounded w-24"></div>
+                    <div className="h-3 bg-gray-400 rounded w-32"></div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              galleryImages.slice(0, 8).map((image, index) => (
+                <div 
+                  key={image.id} 
+                  className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
+                  onClick={() => openFullGallery(index)}
+                >
+                  <img 
+                    src={image.src} 
+                    alt={image.title} 
+                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      // Fallback if image fails to load
+                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='18' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not found%3C/text%3E%3C/svg%3E";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <p className="text-sm">{image.description}</p>
+                    </div>
+                  </div>
+                  {/* Click indicator */}
+                  <div className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* View More Button */}
+          {galleryImages.length > 0 && (
+            <div className="text-center mt-12">
+              <button 
+                onClick={() => openFullGallery(0)}
+                className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-3 rounded-full font-semibold hover:from-green-500 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                View All Photos ({galleryImages.length} total)
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
@@ -1543,6 +1751,98 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Full Gallery Modal */}
+      {fullGalleryOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden shadow-2xl">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-gradient-to-r from-green-50 to-blue-50">
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Photo Gallery</h2>
+                <p className="text-gray-600">
+                  {galleryImages.length > 0 && `${currentImageIndex + 1} of ${galleryImages.length}`}
+                </p>
+              </div>
+              <button 
+                onClick={closeFullGallery}
+                className="text-gray-500 hover:text-gray-700 transition-colors p-2 hover:bg-gray-100 rounded-lg"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </div>
+            
+            {/* Modal Content */}
+            <div className="relative bg-gray-100 flex items-center justify-center" style={{ height: 'calc(95vh - 140px)' }}>
+              {galleryImages.length > 0 ? (
+                <>
+                  {/* Main Image */}
+                  <div className="relative max-w-full max-h-full flex items-center justify-center">
+                    <img 
+                      src={galleryImages[currentImageIndex]?.src} 
+                      alt={galleryImages[currentImageIndex]?.title}
+                      className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+                    />
+                    
+                    {/* Image Info Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 bg-black bg-opacity-70 text-white p-4 rounded-lg">
+                      <h3 className="text-xl font-semibold mb-1">{galleryImages[currentImageIndex]?.title}</h3>
+                      <p className="text-sm opacity-90">{galleryImages[currentImageIndex]?.description}</p>
+                    </div>
+                  </div>
+
+                  {/* Navigation Buttons */}
+                  {galleryImages.length > 1 && (
+                    <>
+                      <button 
+                        onClick={prevFullGalleryImage}
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+                      >
+                        <ChevronLeft className="w-8 h-8" />
+                      </button>
+                      
+                      <button 
+                        onClick={nextFullGalleryImage}
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 text-white p-3 rounded-full transition-all duration-300 hover:scale-110"
+                      >
+                        <ChevronRight className="w-8 h-8" />
+                      </button>
+                    </>
+                  )}
+
+                  {/* Thumbnail Navigation */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 max-w-xs overflow-x-auto">
+                    {galleryImages.map((image, index) => (
+                      <button
+                        key={image.id}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
+                          index === currentImageIndex 
+                            ? 'border-white scale-110' 
+                            : 'border-transparent opacity-70 hover:opacity-100'
+                        }`}
+                      >
+                        <img 
+                          src={image.src} 
+                          alt={image.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                // Loading or no images state
+                <div className="flex flex-col items-center justify-center text-center p-8">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mb-4"></div>
+                  <h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Gallery...</h3>
+                  <p className="text-gray-500">Please wait while we load your images</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
