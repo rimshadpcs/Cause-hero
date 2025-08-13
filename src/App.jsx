@@ -210,6 +210,15 @@ const CheerochCharityWebsite = () => {
     setIsMenuOpen(false);
   };
 
+  const handleNavClick = (item) => {
+    if (item === 'gallery') {
+      openFullGallery(0);
+      setIsMenuOpen(false);
+    } else {
+      scrollToSection(item);
+    }
+  };
+
   const openGallery = (images, title, index = 0) => {
     setCurrentGallery({ images, title, currentIndex: index });
     setGalleryOpen(true);
@@ -720,7 +729,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               {['home', 'about', 'programs', 'achievements', 'gallery', 'contact'].map((item) => (
                 <button
                   key={item}
-                  onClick={() => scrollToSection(item)}
+                  onClick={() => handleNavClick(item)}
                   className={`capitalize px-3 py-2 text-sm font-medium transition-colors ${
                     activeSection === item
                       ? 'border-b-2'
@@ -773,7 +782,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               {['home', 'about', 'programs', 'achievements', 'gallery', 'contact'].map((item) => (
                 <button
                   key={item}
-                  onClick={() => scrollToSection(item)}
+                  onClick={() => handleNavClick(item)}
                   className="capitalize block px-3 py-2 text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 w-full text-left"
                 >
                   {item}
@@ -1437,73 +1446,42 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Gallery Section - Call to Action */}
       <section id="gallery" className="py-20 bg-gray-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Our <span className="text-gradient">Gallery</span>
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 mb-12">
               Moments that capture the essence of our mission and impact
             </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {galleryImages.length === 0 ? (
-              // Loading state
-              Array.from({ length: 8 }).map((_, index) => (
-                <div key={index} className="relative overflow-hidden rounded-lg shadow-lg animate-pulse">
-                  <div className="w-full h-64 bg-gray-300"></div>
-                  <div className="absolute bottom-4 left-4 space-y-2">
-                    <div className="h-4 bg-gray-400 rounded w-24"></div>
-                    <div className="h-3 bg-gray-400 rounded w-32"></div>
-                  </div>
+            
+            {/* Gallery Call to Action */}
+            <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                 </div>
-              ))
-            ) : (
-              galleryImages.slice(0, 8).map((image, index) => (
-                <div 
-                  key={image.id} 
-                  className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer"
-                  onClick={() => openFullGallery(index)}
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Our Photo Gallery</h3>
+                <p className="text-gray-600 mb-8">
+                  Discover the stories behind our work through a collection of photos showcasing our community programs, achievements, and the lives we've touched.
+                </p>
+                <button 
+                  onClick={() => openFullGallery(0)}
+                  className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-4 rounded-full font-semibold hover:from-green-500 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
-                  <img 
-                    src={image.src} 
-                    alt={image.title} 
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='18' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not found%3C/text%3E%3C/svg%3E";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <p className="text-sm">{image.description}</p>
-                    </div>
-                  </div>
-                  {/* Click indicator */}
-                  <div className="absolute top-4 right-4 bg-white bg-opacity-20 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-
-          {/* View More Button */}
-          {galleryImages.length > 0 && (
-            <div className="text-center mt-12">
-              <button 
-                onClick={() => openFullGallery(0)}
-                className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-3 rounded-full font-semibold hover:from-green-500 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                View All Photos ({galleryImages.length} total)
-              </button>
+                  <svg className="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                  View Photo Gallery
+                </button>
+              </div>
             </div>
-          )}
+          </div>
         </div>
       </section>
 
