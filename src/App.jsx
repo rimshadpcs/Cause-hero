@@ -145,7 +145,7 @@ const CheerochCharityWebsite = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'programs', 'achievements', 'gallery', 'donate', 'contact'];
+      const sections = ['home', 'about', 'programs', 'achievements', 'donate', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach(section => {
@@ -1446,44 +1446,6 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
         </div>
       </section>
 
-      {/* Gallery Section - Call to Action */}
-      <section id="gallery" className="py-20 bg-gray-50 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our <span className="text-gradient">Gallery</span>
-            </h2>
-            <p className="text-xl text-gray-600 mb-12">
-              Moments that capture the essence of our mission and impact
-            </p>
-            
-            {/* Gallery Call to Action */}
-            <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-xl p-8 md:p-12">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Explore Our Photo Gallery</h3>
-                <p className="text-gray-600 mb-8">
-                  Discover the stories behind our work through a collection of photos showcasing our community programs, achievements, and the lives we've touched.
-                </p>
-                <button 
-                  onClick={() => openFullGallery(0)}
-                  className="bg-gradient-to-r from-green-400 to-green-600 text-white px-8 py-4 rounded-full font-semibold hover:from-green-500 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                  <svg className="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                  View Photo Gallery
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 text-white relative overflow-hidden" style={{backgroundColor: '#65C26F'}}>
