@@ -1305,7 +1305,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                   <div className="text-white">
                     <h4 className="text-lg font-semibold mb-2">CHEERO in Action</h4>
-                    <p className="text-sm opacity-90">Watch our impact in the community - highlighting our key programs and achievements</p>
+                    <p className="text-sm opacity-90">Featured on Telugu news for our ambulance donation - providing emergency medical transport to rural communities</p>
                     <div className="flex items-center mt-3 text-xs opacity-75">
                       <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
@@ -1326,7 +1326,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                   </div>
                   <div>
                     <h5 className="font-semibold text-gray-900 mb-1">Watch Our Story</h5>
-                    <p className="text-sm text-gray-600">This video showcases our community programs and the positive impact we're making in people's lives. Curated to highlight our most significant achievements.</p>
+                    <p className="text-sm text-gray-600">CHEERO featured on Telugu news channel for our ambulance donation initiative - highlighting how we're providing life-saving emergency medical transport to serve rural communities in need.</p>
                   </div>
                 </div>
               </div>
