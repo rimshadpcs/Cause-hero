@@ -56,6 +56,12 @@ import suryaa from './assets/images/media/suryaa.jpg';
 import saakshi from './assets/images/media/saakshi.avif';
 import warangalVoice from './assets/images/media/Warangalvoice.png';
 
+// People images
+import aneeshPhoto from './assets/images/people/aneesh.png';
+import prahladanPhoto from './assets/images/people/Prahladan.png';
+import ramuPhoto from './assets/images/people/Ramu.png';
+import rimshadPhoto from './assets/images/people/rimshad.png';
+
 const CheerochCharityWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -517,7 +523,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
       title: "President & Co-founder",
       role: "Leadership & Healthcare",
       description: "Dr. Aneesh is a distinguished medical professional who has been serving as a senior doctor in the NHS UK for more than 20 years. As President of CHEERO and Co-founder, he brings extensive healthcare expertise and visionary leadership to our organization. His dedication to healthcare excellence and community service has been instrumental in establishing our medical programs and expanding our reach to underserved communities. Dr. Aneesh's commitment to bridging healthcare gaps and his strategic oversight have helped CHEERO become a trusted name in charitable healthcare services.",
-      image: "/src/assets/images/people/aneesh.png"
+      image: aneeshPhoto
     },
     {
       id: 2,
@@ -525,7 +531,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
       title: "Main Teacher & Education Head",
       role: "Education & Training",
       description: "Prahladan brings over 25 years of exceptional teaching experience to CHEERO, having been with the organization since its very beginning. As our Main Teacher and Education Head, he has been the backbone of our educational initiatives, transforming the lives of countless students through his dedicated teaching and mentorship. His extensive experience in education and unwavering commitment to learning has helped establish our coaching programs, skill development courses, and educational outreach initiatives. Prahladan's passion for education and his ability to connect with students of all ages has made him an invaluable asset to our mission of educational empowerment.",
-      image: "/src/assets/images/people/Prahladan.png"
+      image: prahladanPhoto
     }
   ];
 
@@ -536,7 +542,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
       title: "Computer Teacher & IT Specialist",
       role: "Digital Literacy",
       description: "Ramu is our dedicated Computer Teacher who has helped hundreds of students achieve computer literacy and digital skills. His expertise in technology education has been crucial in bridging the digital divide in our community. Through his patient teaching methods and comprehensive computer training programs, Ramu has empowered students with essential digital skills that enhance their educational and employment opportunities. His contribution to making technology accessible to underprivileged students has been transformational for our community.",
-      image: "/src/assets/images/people/Ramu.png"
+      image: ramuPhoto
     },
     {
       id: 2,
@@ -544,7 +550,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
       title: "Tech Volunteer & Developer",
       role: "Web Development & Digital Solutions",
       description: "Mohamed Rimshad has been an exceptional tech volunteer with CHEERO for over 2 years, revolutionizing our digital infrastructure. He single-handedly built our professional website, enabling us to reach a global audience and showcase our charitable impact effectively. His PayPal integration system has streamlined donation processes, making it easier for supporters worldwide to contribute. Most notably, he developed the CHEERO Connect Android app in Kotlin, allowing key workers and volunteers to submit daily operational reports directly to admin dashboards through Google Sheets integration. This innovation has reduced our paperwork by 50%, eliminated work backlogs, and significantly improved operational efficiency. Mohamed's dedication to leveraging technology for social good has transformed CHEERO's digital presence and administrative capabilities.",
-      image: "/src/assets/images/people/rimshad.png"
+      image: rimshadPhoto
     }
   ];
 
