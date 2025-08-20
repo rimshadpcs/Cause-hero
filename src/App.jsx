@@ -513,35 +513,38 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
   const teamMembers = [
     {
       id: 1,
-      name: "Dr. Chandra Sekhar",
-      title: "Founder & Chairman",
-      role: "Leadership",
-      description: "With over 25 years of experience in community development and healthcare, Dr. Chandra Sekhar founded CHEERO Charity with a vision to bridge the gap between resources and those in need. He oversees all strategic initiatives and maintains direct involvement in our health programs.With over 25 years of experience in community development and healthcare, Dr. Chandra Sekhar founded CHEERO Charity with a vision to bridge the gap between resources and those in need. He oversees all strategic initiatives and maintains direct involvement in our health programs.",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=300&fit=crop&crop=face"
+      name: "Dr. Aneesh",
+      title: "President & Co-founder",
+      role: "Leadership & Healthcare",
+      description: "Dr. Aneesh is a distinguished medical professional who has been serving as a senior doctor in the NHS UK for more than 20 years. As President of CHEERO and Co-founder, he brings extensive healthcare expertise and visionary leadership to our organization. His dedication to healthcare excellence and community service has been instrumental in establishing our medical programs and expanding our reach to underserved communities. Dr. Aneesh's commitment to bridging healthcare gaps and his strategic oversight have helped CHEERO become a trusted name in charitable healthcare services.",
+      image: "/src/assets/images/people/aneesh.png"
     },
     {
       id: 2,
-      name: "Mrs. Lakshmi Devi",
-      title: "Program Director",
-      role: "Operations",
-      description: "Leading our education and welfare programs, Mrs. Lakshmi has been instrumental in expanding our reach to over 130 children through daily coaching programs. She manages the day-to-day operations and coordinates with local communities to identify needs.",
-      image: "https://images.unsplash.com/photo-1594824388853-bf9d0a81b4be?w=300&h=300&fit=crop&crop=face"
+      name: "Prahladan",
+      title: "Main Teacher & Education Head",
+      role: "Education & Training",
+      description: "Prahladan brings over 25 years of exceptional teaching experience to CHEERO, having been with the organization since its very beginning. As our Main Teacher and Education Head, he has been the backbone of our educational initiatives, transforming the lives of countless students through his dedicated teaching and mentorship. His extensive experience in education and unwavering commitment to learning has helped establish our coaching programs, skill development courses, and educational outreach initiatives. Prahladan's passion for education and his ability to connect with students of all ages has made him an invaluable asset to our mission of educational empowerment.",
+      image: "/src/assets/images/people/Prahladan.png"
+    }
+  ];
+
+  const volunteers = [
+    {
+      id: 1,
+      name: "Ramu",
+      title: "Computer Teacher & IT Specialist",
+      role: "Digital Literacy",
+      description: "Ramu is our dedicated Computer Teacher who has helped hundreds of students achieve computer literacy and digital skills. His expertise in technology education has been crucial in bridging the digital divide in our community. Through his patient teaching methods and comprehensive computer training programs, Ramu has empowered students with essential digital skills that enhance their educational and employment opportunities. His contribution to making technology accessible to underprivileged students has been transformational for our community.",
+      image: "/src/assets/images/people/Ramu.png"
     },
     {
-      id: 3,
-      name: "Mr. Ravi Kumar",
-      title: "Health Services Coordinator",
-      role: "Healthcare",
-      description: "A qualified nurse with 15 years of experience, Mr. Ravi manages our free health clinic and ambulance services. He has been crucial in establishing our laboratory services and ensuring quality healthcare reaches the most vulnerable in our community.",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&h=300&fit=crop&crop=face"
-    },
-    {
-      id: 4,
-      name: "Ms. Priya Sharma",
-      title: "Volunteer Coordinator",
-      role: "Community Outreach",
-      description: "Ms. Priya leads our volunteer program and manages community outreach initiatives. She coordinates our tailoring classes, computer training programs, and helps new volunteers integrate into our mission. Her passion for education has helped establish our free library and internet access center.",
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face"
+      id: 2,
+      name: "Mohamed Rimshad",
+      title: "Tech Volunteer & Developer",
+      role: "Web Development & Digital Solutions",
+      description: "Mohamed Rimshad has been an exceptional tech volunteer with CHEERO for over 2 years, revolutionizing our digital infrastructure. He single-handedly built our professional website, enabling us to reach a global audience and showcase our charitable impact effectively. His PayPal integration system has streamlined donation processes, making it easier for supporters worldwide to contribute. Most notably, he developed the CHEERO Connect Android app in Kotlin, allowing key workers and volunteers to submit daily operational reports directly to admin dashboards through Google Sheets integration. This innovation has reduced our paperwork by 50%, eliminated work backlogs, and significantly improved operational efficiency. Mohamed's dedication to leveraging technology for social good has transformed CHEERO's digital presence and administrative capabilities.",
+      image: "/src/assets/images/people/rimshad.png"
     }
   ];
 
@@ -1626,37 +1629,85 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
             
             {/* Modal Content */}
             <div className="p-8 overflow-y-auto max-h-[calc(95vh-200px)]">
-              <div className="space-y-8">
-                {teamMembers.map((member) => (
-                  <div key={member.id} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
-                    <div className="text-center">
-                      {/* Member Image */}
-                      <div className="flex justify-center mb-6">
-                        <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-200">
-                          <img 
-                            src={member.image} 
-                            alt={member.name}
-                            className="w-full h-full object-cover"
-                          />
+              
+              {/* Team Members Section */}
+              <div className="mb-12">
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-2">Core Team</h3>
+                  <p className="text-gray-600">Our dedicated leadership driving CHEERO's mission forward</p>
+                </div>
+                <div className="space-y-8">
+                  {teamMembers.map((member) => (
+                    <div key={member.id} className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                      <div className="text-center">
+                        {/* Member Image */}
+                        <div className="flex justify-center mb-6">
+                          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-200">
+                            <img 
+                              src={member.image} 
+                              alt={member.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                         </div>
+                        
+                        {/* Member Info */}
+                        <div className="mb-6">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
+                          <p className="text-xl font-semibold text-green-600 mb-3">{member.title}</p>
+                          <span className="inline-block px-4 py-2 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                            {member.role}
+                          </span>
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-gray-700 leading-relaxed text-lg text-left">
+                          {member.description}
+                        </p>
                       </div>
-                      
-                      {/* Member Info */}
-                      <div className="mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                        <p className="text-xl font-semibold text-green-600 mb-3">{member.title}</p>
-                        <span className="inline-block px-4 py-2 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                          {member.role}
-                        </span>
-                      </div>
-                      
-                      {/* Description */}
-                      <p className="text-gray-700 leading-relaxed text-lg text-left">
-                        {member.description}
-                      </p>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+
+              {/* Volunteers Section */}
+              <div className="mb-12">
+                <div className="text-center mb-8">
+                  <h3 className="text-3xl font-bold text-gray-900 mb-2">Volunteers</h3>
+                  <p className="text-gray-600">Passionate individuals making a difference through their dedication</p>
+                </div>
+                <div className="space-y-8">
+                  {volunteers.map((volunteer) => (
+                    <div key={volunteer.id} className="bg-blue-50 rounded-2xl p-8 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                      <div className="text-center">
+                        {/* Volunteer Image */}
+                        <div className="flex justify-center mb-6">
+                          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-200">
+                            <img 
+                              src={volunteer.image} 
+                              alt={volunteer.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Volunteer Info */}
+                        <div className="mb-6">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">{volunteer.name}</h3>
+                          <p className="text-xl font-semibold text-blue-600 mb-3">{volunteer.title}</p>
+                          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                            {volunteer.role}
+                          </span>
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-gray-700 leading-relaxed text-lg text-left">
+                          {volunteer.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
               
               {/* Additional Information */}
