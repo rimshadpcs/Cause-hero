@@ -61,6 +61,14 @@ import aneeshPhoto from './assets/images/people/aneesh.png';
 import prahladanPhoto from './assets/images/people/Prahladan.png';
 import ramuPhoto from './assets/images/people/Ramu.png';
 import rimshadPhoto from './assets/images/people/rimshad.png';
+import drShwethaPhoto from './assets/images/people/drShwetha.jpeg';
+import avaneeshPhoto from './assets/images/people/avaneesh.jpg';
+import gururajPhoto from './assets/images/people/Gururaj Health care worker.png';
+import syedSowmayeePhoto from "./assets/images/people/Syed Sowmayee, computer tutor.png";
+import lakshmiTailorPhoto from './assets/images/people/lakshmi-taylor.jpeg';
+import pallaviTailorPhoto from './assets/images/people/pallavi-taylor.jpeg';
+import musicTeacherPhoto from './assets/images/people/musicteacher.jpg';
+import placeholderPhoto from './assets/images/people/placeholder.svg';
 
 const CheerochCharityWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -517,20 +525,61 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
   };
 
   const teamMembers = [
+    // Hierarchy by qualification: Medical Doctors → PhD/Research → Law/Governance → Trustees → Education Leadership
     {
       id: 1,
       name: "Dr. Aneesh",
       title: "President & Co-founder",
       role: "Leadership & Healthcare",
-      description: "Dr. Aneesh is a distinguished medical professional who has been serving as a senior doctor in the NHS UK for more than 20 years. As President of CHEERO and Co-founder, he brings extensive healthcare expertise and visionary leadership to our organization. His dedication to healthcare excellence and community service has been instrumental in establishing our medical programs and expanding our reach to underserved communities. Dr. Aneesh's commitment to bridging healthcare gaps and his strategic oversight have helped CHEERO become a trusted name in charitable healthcare services.",
+      description: "Senior NHS doctor (20+ years) and co-founder of CHEERO. Leads overall strategy, medical programs, and partnerships. Focused on accessible healthcare, scalable community initiatives, and high-standards clinical governance across CHEERO’s services.",
       image: aneeshPhoto
     },
     {
       id: 2,
+      name: "Dr Prabhavathi",
+      title: "Consultant Cardiologist",
+      role: "Clinical Advisor – Cardiology",
+      description: "Dr Prabhavathi (MD, DM, DNB) is a senior cardiologist who guides CHEERO’s cardiac health outreach with a focus on safety, prevention, and early intervention. She designs context-appropriate screening pathways, trains staff on triage and referral protocols, and reviews complex cases from our clinics and camps. Her expertise strengthens our standard operating procedures, ensuring that community members receive timely, evidence-based cardiac advice and are connected to specialist care when needed.",
+      image: placeholderPhoto
+    },
+    {
+      id: 3,
+      name: "Dr Shwetha",
+      title: "Scientific Director",
+      role: "Research & Strategic Programs",
+      description: "Dr Shwetha (MSc, PhD) leads the scientific backbone of CHEERO’s initiatives—crafting evidence-based programs, building robust monitoring frameworks, and translating data into practical improvements. She mentors field teams to collect and interpret outcomes, aligns interventions with global best practices, and publishes learnings that inform scale-up. Her work ensures every rupee and minute invested translates into measurable, sustained community impact.",
+      image: drShwethaPhoto
+    },
+    {
+      id: 4,
+      name: "Avaneesh Taranath",
+      title: "Legal Advisor",
+      role: "Governance & Compliance",
+      description: `Avaneesh (B Pharma, LLB) safeguards CHEERO’s operations through practical legal guidance across contracts, compliance, and risk management. He standardizes MoUs and vendor agreements, streamlines documentation for audits and due diligence, and strengthens governance policies to keep day-to-day operations transparent and resilient. His cross-disciplinary background bridges healthcare realities with legal structure, enabling sustainable growth.`,
+      image: avaneeshPhoto
+    },
+    {
+      id: 5,
+      name: "Aneesh Taranath",
+      title: "Founder Trustee",
+      role: "Trust & Strategy",
+      description: "As Founder Trustee, Aneesh anchors CHEERO’s mission, culture, and stakeholder relationships. He steers long-term strategy, champions partnerships with hospitals, educators, and local leaders, and supports transparent fundraising and oversight. His guidance ensures that new programs stay true to CHEERO’s values while meeting real community needs.",
+      image: placeholderPhoto
+    },
+    {
+      id: 6,
+      name: "Govind Rao",
+      title: "Trustee",
+      role: "Trust & Stewardship",
+      description: "Govind Rao serves as Trustee with a focus on stewardship and donor confidence. He supports governance reviews, tracks program milestones against budgets, and engages donors with clear reporting on outcomes and impact. His meticulous approach to oversight helps CHEERO remain efficient, compliant, and impact-focused.",
+      image: placeholderPhoto
+    },
+    {
+      id: 7,
       name: "Prahladan",
       title: "Main Teacher & Education Head",
       role: "Education & Training",
-      description: "Prahladan brings over 25 years of exceptional teaching experience to CHEERO, having been with the organization since its very beginning. As our Main Teacher and Education Head, he has been the backbone of our educational initiatives, transforming the lives of countless students through his dedicated teaching and mentorship. His extensive experience in education and unwavering commitment to learning has helped establish our coaching programs, skill development courses, and educational outreach initiatives. Prahladan's passion for education and his ability to connect with students of all ages has made him an invaluable asset to our mission of educational empowerment.",
+      description: "25+ years with CHEERO. Leads coaching, curricula, and learning quality across centers. Mentors tutors, coordinates assessments, and drives foundational learning outcomes for children and adult learners.",
       image: prahladanPhoto
     }
   ];
@@ -551,6 +600,126 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
       role: "Web Development & Digital Solutions",
       description: "Mohamed Rimshad has been an exceptional tech volunteer with CHEERO for over 2 years, revolutionizing our digital infrastructure. He single-handedly built our professional website, enabling us to reach a global audience and showcase our charitable impact effectively. His PayPal integration system has streamlined donation processes, making it easier for supporters worldwide to contribute. Most notably, he developed the CHEERO Connect Android app in Kotlin, allowing key workers and volunteers to submit daily operational reports directly to admin dashboards through Google Sheets integration. This innovation has reduced our paperwork by 50%, eliminated work backlogs, and significantly improved operational efficiency. Mohamed's dedication to leveraging technology for social good has transformed CHEERO's digital presence and administrative capabilities.",
       image: rimshadPhoto
+    },
+    {
+      id: 3,
+      name: "Gururaj Hiremath",
+      title: "Health Care Worker",
+      role: "Community Health Services",
+      description: "Gururaj is a dependable frontline health worker supporting patient intake, vitals recording, and community health camps. He coordinates with nurses and visiting doctors to maintain orderly clinical workflows, ensures crowd management during busy hours, and assists with follow-ups. His calm presence and attention to detail help patients feel safe and supported.",
+      image: gururajPhoto
+    },
+    {
+      id: 4,
+      name: "Syed Sowmayee",
+      title: "Computer Tutor",
+      role: "Digital Literacy",
+      description: "Syed delivers computer literacy from first-time keyboard use to office tools, file management, and safe internet practices. He structures lessons for mixed-age groups, runs practical labs, and tracks learner progress with simple assessments. Many of his students go on to handle online applications, college assignments, and entry‑level office roles with confidence.",
+      image: syedSowmayeePhoto
+    },
+    {
+      id: 5,
+      name: "Lakshmi",
+      title: "Tailoring Tutor",
+      role: "Skill Development",
+      description: "Lakshmi leads practical tailoring batches—from measurements and pattern drafting to stitching and finishing. She emphasizes quality, repeatable techniques, and time management so learners can take up piece work or small orders. Many women credit her patient coaching for their first independent income.",
+      image: lakshmiTailorPhoto
+    },
+    {
+      id: 6,
+      name: "Pallavi",
+      title: "Tailoring Tutor",
+      role: "Skill Development",
+      description: "Pallavi mentors advanced learners through complex cuts and finishing, reinforcing consistency and customer readiness. She introduces simple production workflows and quality checks that mirror real work environments, preparing trainees for micro‑enterprise or shop-floor roles.",
+      image: pallaviTailorPhoto
+    },
+    {
+      id: 7,
+      name: "Jambuswamy",
+      title: "Tailoring Tutor & Music Teacher",
+      role: "Skill Development & Arts",
+      description: "A multi‑talented tutor, Jambuswamy supports tailoring sessions and conducts music classes that build rhythm, discipline, and confidence. His dual role helps students balance livelihood skills with creative growth, improving focus and teamwork in group settings.",
+      image: musicTeacherPhoto
+    },
+    {
+      id: 8,
+      name: "Jamana Pabari",
+      title: "Tutor",
+      role: "Computer Applications",
+      description: "Jamana (BCA, MCA) teaches a structured computer applications curriculum—from productivity suites and email etiquette to basic databases and introductory programming concepts. She uses project‑based learning and practical assignments to ensure students can apply skills to college work and entry‑level roles.",
+      image: placeholderPhoto
+    },
+    {
+      id: 9,
+      name: "Anjali S",
+      title: "Tutor",
+      role: "STEM & Practical Skills",
+      description: "Anjali (BE Mechanical Engineering) facilitates STEM learning through real‑world examples, hands‑on problem solving, and concept reinforcement. She helps learners bridge textbook theory with practical understanding, improving exam performance and curiosity for engineering pathways.",
+      image: placeholderPhoto
+    },
+    {
+      id: 10,
+      name: "Lalitha",
+      title: "Tutor",
+      role: "Math & Foundations",
+      description: "Lalitha (B Tech, IIT) delivers high‑clarity instruction in mathematics and science with an emphasis on conceptual understanding and methodical problem‑solving. She builds individualized learning plans, runs weekly diagnostic check‑ins, and uses spaced‑repetition worksheets to close gaps. Her structured routines help students move from rote to reasoning, improving exam confidence and accuracy across topics.",
+      image: placeholderPhoto
+    },
+    {
+      id: 11,
+      name: "Natasha Braganza",
+      title: "Tutor",
+      role: "Commerce & Management",
+      description: "Natasha (BCom, MBA) coaches accounting fundamentals, business studies, and professional communication through practical mini‑projects. She organizes mock presentations, interview prep, and resume workshops so learners can translate classroom knowledge into entry‑level workplace skills. Her mentoring improves articulation, confidence, and career readiness.",
+      image: placeholderPhoto
+    },
+    {
+      id: 12,
+      name: "Ishwariya Laksmi",
+      title: "Tutor",
+      role: "Science & Study Skills",
+      description: "Ishwariya (BSc, MSc) strengthens science learning with concept maps, experiment‑linked examples, and revision plans tailored to each student. She builds strong notebooks and recall drills so learners retain and apply ideas under exam pressure. Her supportive coaching steadily lifts confidence and marks.",
+      image: placeholderPhoto
+    },
+    {
+      id: 13,
+      name: "Narasamma Chakali",
+      title: "Nurse in Charge",
+      role: "Clinic Operations",
+      description: "Narasamma manages daily clinic flow—triage and vitals, queue management, and patient guidance—while maintaining essential supplies and clean, safe stations. She supports visiting doctors during busy clinics, helps coordinate follow‑ups, and reinforces health education with patients and families.",
+      image: placeholderPhoto
+    },
+    {
+      id: 14,
+      name: "Ravi",
+      title: "Tutor",
+      role: "General Academics",
+      description: "Ravi focuses on foundational literacy and numeracy using phonics, graded readers, and scaffolded problem sets. He runs homework clubs, tracks small wins with simple progress charts, and motivates slower learners to build consistency. Attendance, confidence, and marks rise steadily under his mentorship.",
+      image: placeholderPhoto
+    },
+    {
+      id: 15,
+      name: "Shanti",
+      title: "Tutor",
+      role: "General Academics",
+      description: "Shanti conducts small‑group sessions that reinforce school lessons and repair basics through bite‑sized practice. She collaborates with parents on short home practice plans, uses attendance nudges, and celebrates incremental progress—helping children build lasting study habits.",
+      image: placeholderPhoto
+    },
+    {
+      id: 16,
+      name: "Marthamma",
+      title: "Health Care Worker",
+      role: "Community Health Services",
+      description: "Marthamma supports outreach days and busy clinics by assisting with screening stations, crowd guidance, and basic documentation. She helps run health education activities and ensures patients know next steps for follow‑ups and referrals.",
+      image: placeholderPhoto
+    },
+    {
+      id: 17,
+      name: "Laksmi Gooni",
+      title: "Tailoring Teacher",
+      role: "Skill Development",
+      description: "Laksmi runs a clear progression from measurements and cutting to machine handling, stitching, and high‑quality finishing. She emphasizes accuracy and repeatability, and mentors trainees on pricing, timelines, and basic customer service so they can confidently take on paid orders.",
+      image: placeholderPhoto
     }
   ];
 
@@ -1648,7 +1817,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                       <div className="text-center">
                         {/* Member Image */}
                         <div className="flex justify-center mb-6">
-                          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-green-200">
+                          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-200">
                             <img 
                               src={member.image} 
                               alt={member.name}
@@ -1660,8 +1829,8 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                         {/* Member Info */}
                         <div className="mb-6">
                           <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                          <p className="text-xl font-semibold text-green-600 mb-3">{member.title}</p>
-                          <span className="inline-block px-4 py-2 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                          <p className="text-xl font-semibold text-blue-600 mb-3">{member.title}</p>
+                          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
                             {member.role}
                           </span>
                         </div>
@@ -1717,11 +1886,11 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               </div>
               
               {/* Additional Information */}
-              <div className="mt-12 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8">
+              <div className="mt-12 bg-blue-50 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Join Our Team</h3>
                 <div className="grid md:grid-cols-2 gap-8">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Users className="w-8 h-8 text-white" />
                     </div>
                     <h4 className="text-xl font-semibold mb-2">29+ Paid Workers</h4>
@@ -1742,7 +1911,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                       closeTeamModal();
                       setTimeout(() => scrollToSection('contact'), 300);
                     }}
-                    className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-all duration-300 font-semibold hover:scale-105 hover:shadow-lg"
+                    className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-all duration-300 font-semibold hover:scale-105 hover:shadow-lg"
                   >
                     Get in Touch
                   </button>
