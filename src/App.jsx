@@ -1565,13 +1565,13 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
               <h3 className="text-lg font-bold text-gray-900 mb-6 text-center">Choose Payment Method</h3>
               
               <div className="grid md:grid-cols-2 gap-4 mb-6">
-                {/* PayPal Donate Button */}
+                {/* PayPal Standard Payment Button (temporary workaround) */}
                 <div className="flex justify-center">
-                  <form action="https://www.paypal.com/donate" method="post" target="_top" className="w-full">
-                    <input type="hidden" name="business" value="rimshadpcs@gmail.com" />
-                    <input type="hidden" name="no_recurring" value="0" />
-                    <input type="hidden" name="item_name" value="CHEERO Charity Donation" />
-                    <input type="hidden" name="currency" value="GBP" />
+                  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" className="w-full">
+                    <input type="hidden" name="cmd" value="_xclick" />
+                    <input type="hidden" name="business" value="cheerocharity@hotmail.com" />
+                    <input type="hidden" name="item_name" value="CHEERO Charity Support" />
+                    <input type="hidden" name="currency_code" value="GBP" />
                     <button 
                       type="submit"
                       className="w-full bg-blue-600 text-white px-6 py-4 rounded-2xl font-semibold hover:bg-blue-700 transition-all duration-300 flex items-center justify-center hover:scale-105 hover:shadow-lg group relative overflow-hidden"
@@ -1580,7 +1580,7 @@ Address: 4 Sapperton House, Brunel Estate, Westbourne Park Road, London W2 5UT</
                       <svg className="w-6 h-6 mr-3 relative z-10" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a9.36 9.36 0 0 1-.077.437c-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106h4.61a.641.641 0 0 0 .633-.74l.033-.210.629-3.987.041-.17a.641.641 0 0 1 .633-.74h.394c3.776 0 6.73-1.533 7.59-5.966.36-1.855.174-3.406-.777-4.471z"/>
                       </svg>
-                      <span className="relative z-10">Donate with PayPal</span>
+                      <span className="relative z-10">Pay with PayPal</span>
                     </button>
                   </form>
                 </div>
